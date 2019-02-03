@@ -61,7 +61,7 @@ public:
         // Create a TTree
         if (getrawdata == 1)
         {
-            TString csvfile = Form("v1740_csv%05d.csv",run);
+            TString csvfile = Form("v174_csv%05d.csv",run);
             outfile.open(csvfile);
         }
     }
