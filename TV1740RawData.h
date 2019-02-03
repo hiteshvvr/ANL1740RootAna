@@ -6,7 +6,6 @@
 #include "TGenericData.hxx"
 
 
-
 /// Class to store information from a single V1740 channel.
 /// Class will store either the full ADC waveform (if not compressed)
 /// or a vector of TV1740RawZlePulse (if compressed).
@@ -23,8 +22,6 @@ class TV1740RawChannel {
 
   int GetChannelNumber() const {return fChannelNumber;};
 
-  
-  
   
   /// Get the ADC sample for a particular bin (for uncompressed data).
   int GetNSamples() const{return fWaveform.size();};
@@ -59,13 +56,12 @@ class TV1740RawChannel {
 };
 
 
-/// Class to store data from CAEN V1740, 250MHz FADC.
+/// Class to store data from CAEN V1740, 64.5MHz ADC.
 ///
-/// Full info on CAEN V1740 module
-/// http://daq-plone.triumf.ca/HR/VME/CAEN/v1740rev9.pdf/view
+/// For Full info on CAEN V1740 module look in CAEN website. 
 ///
 /// This class encapsulates the data from a single board (in a single MIDAS bank).
-/// This decoder is for the default or ZLE version of the firmware.  Not the DPP firmware
+/// This decoder is for the raw waveform data and not for the DPP data.
 class TV1740RawData: public TGenericData {
 
 public:
@@ -74,9 +70,9 @@ public:
   TV1740RawData(int bklen, int bktype, const char* name, void *pdata);
 
   /// Get the number of 32-bit words in bank.
-  uint32_t GetEventSize() const {return (fGlobalHeader0 & 0xffffff);};
+  uint32_t GetEventSize() const {return (fGlobalHeader0 & 0xfffffff);};
 
-  /// Get the channel mask; ie, the set of channels for which we 
+  /// Get the channel Group mask; ie, the set of channels for which we 
   /// have data for this event.
   uint32_t GetChannelMask() const {return (fGlobalHeader1 & 0xff);};
 
@@ -98,7 +94,7 @@ public:
     if(i >= 0 && i < (int)fMeasurements.size())
       return fMeasurements[i];
 
-    return TV1740RawChannel(0,0);
+    return TV1740RawChannel(0);
   }
   
 
@@ -106,9 +102,6 @@ public:
 
 
 private:
-
-  /// Helper method to handle ZLE compressed data.
-  void HandlZLECompressedData();
 
   /// Helper method to handle uncompressed data.
   void HandlUncompressedData();
