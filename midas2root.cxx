@@ -90,7 +90,7 @@ public:
             TV1740RawChannel channelData = v1740->GetChannelData(i);
             numsamples = channelData.GetNSamples();
             for (j = 0; j < numsamples; j++)
-                outfile << timetag + j*16 << "  " << adc << "\n";
+                outfile << timetag + j*16 << "  " << channelData.GetADCSample(j) << "\n";
         }
 
         else 

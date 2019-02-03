@@ -14,6 +14,7 @@
 // #define USE_V1730RAW
 // #define USE_DT724
 
+#include "TRootanaEventLoop.hxx"
 // #include "TV792Histogram.h"
 // #include "TV1190Histogram.h"
 // #include "TL2249Histogram.h"

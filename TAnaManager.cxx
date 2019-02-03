@@ -1,5 +1,6 @@
 #include "TAnaManager.hxx"
 #include "TV1720RawData.h"
+#include "TV1740RawData.h"
 
 
 TAnaManager::TAnaManager(){
@@ -28,34 +29,34 @@ TAnaManager::TAnaManager(){
 // 	fAgilentHistogram->DisableAutoUpdate();  // disable auto-update.  Update histo in AnaManager.
 // #endif
 
-	fV1720Waveform = 0;
-#ifdef USE_V1720
+// 	fV1720Waveform = 0;
+// #ifdef USE_V1720
 
-	fV1720Waveform = new TV1720Waveform();
-	fV1720Waveform->DisableAutoUpdate();  // disable auto-update.  Update histo in AnaManager.
+// 	fV1720Waveform = new TV1720Waveform();
+// 	fV1720Waveform->DisableAutoUpdate();  // disable auto-update.  Update histo in AnaManager.
 
-        fV1720PHCompare = new TH2F("V1720PHCompare","Pulse Height: Channel 1 vs 0",100,300,700,100,300,700);
-        fV1720PHCompare->SetXTitle("Channel 0");
-        fV1720PHCompare->SetYTitle("Channel 1");
-        fV1720TimeCompare = new TH2F("V1720TimeCompare","Time: Channel 1 vs 0",100,0,2000,100,0,2000);
-        fV1720TimeCompare->SetXTitle("Channel 0");
-        fV1720TimeCompare->SetYTitle("Channel 1");
+//         fV1720PHCompare = new TH2F("V1720PHCompare","Pulse Height: Channel 1 vs 0",100,300,700,100,300,700);
+//         fV1720PHCompare->SetXTitle("Channel 0");
+//         fV1720PHCompare->SetYTitle("Channel 1");
+//         fV1720TimeCompare = new TH2F("V1720TimeCompare","Time: Channel 1 vs 0",100,0,2000,100,0,2000);
+//         fV1720TimeCompare->SetXTitle("Channel 0");
+//         fV1720TimeCompare->SetYTitle("Channel 1");
 
-        // My Code
+//         // My Code
 
-        fV1720Ch1 = new TH1D("ch1","Histogram of Channel1", 10000, 0,4000);
-        fV1720Ch2 = new TH1D("ch2","Histogram of Channel2", 10000, 0,4000);
-        fV1720Ch3 = new TH1D("ch3","Histogram of Channel3", 10000, 0,4000);
-        fV1720Ch4 = new TH1D("ch4","Histogram of Channel4", 10000, 0,4000);
+//         fV1720Ch1 = new TH1D("ch1","Histogram of Channel1", 10000, 0,4000);
+//         fV1720Ch2 = new TH1D("ch2","Histogram of Channel2", 10000, 0,4000);
+//         fV1720Ch3 = new TH1D("ch3","Histogram of Channel3", 10000, 0,4000);
+//         fV1720Ch4 = new TH1D("ch4","Histogram of Channel4", 10000, 0,4000);
 
 
-#endif
+// #endif
 
-	fV1720Correlations = 0;
-#ifdef USE_V1720
-	fV1720Correlations = new TV1720Correlations();
-	fV1720Correlations->DisableAutoUpdate();  // disable auto-update.  Update histo in AnaManager.
-#endif
+// 	fV1720Correlations = 0;
+// #ifdef USE_V1720
+// 	fV1720Correlations = new TV1720Correlations();
+// 	fV1720Correlations->DisableAutoUpdate();  // disable auto-update.  Update histo in AnaManager.
+// #endif
 
 // 	fV1730DppWaveform = 0;
 // #ifdef USE_V1730DPP
@@ -86,8 +87,8 @@ int TAnaManager::ProcessMidasEvent(TDataContainer& dataContainer){
  //  	if(fV1190Histogram)  fV1190Histogram->UpdateHistograms(dataContainer); 
 	// if(fL2249Histogram)  fL2249Histogram->UpdateHistograms(dataContainer); 
  //  	if(fAgilentHistogram)  fAgilentHistogram->UpdateHistograms(dataContainer); 
-	if(fV1720Waveform)  fV1720Waveform->UpdateHistograms(dataContainer);
-	if(fV1720Correlations)  fV1720Correlations->UpdateHistograms(dataContainer); 
+	// if(fV1720Waveform)  fV1720Waveform->UpdateHistograms(dataContainer);
+	// if(fV1720Correlations)  fV1720Correlations->UpdateHistograms(dataContainer); 
   	// if(fV1730DppWaveform)  fV1730DppWaveform->UpdateHistograms(dataContainer); 
 	// if(fV1730RawWaveform)  fV1730RawWaveform->UpdateHistograms(dataContainer);
 
@@ -127,106 +128,106 @@ int TAnaManager::ProcessMidasEvent(TDataContainer& dataContainer){
 // early code use it its good...          }
 // early code use it its good...        }
 
-  if(fV1720Ch1)
-  {
-    TV1720RawData *v1720 = dataContainer.GetEventData<TV1720RawData>("DG01");
-    if (v1720 && !v1720->IsZLECompressed())
-    {
-      TV1720RawChannel channelData = v1720->GetChannelData(0);
-      int numsamples = channelData.GetNSamples();
-      // if(numsamples<= 0) continue;
-          int max_val= -1;
-          int max_time= -1;
-          for (int j = 0; j < numsamples; j++)
-          {
-            int adc;
-            adc = channelData.GetADCSample(j);
-            if(adc>max_val)
-            {
-              max_val=adc;
-              max_time = j * 4;
-            }
-          }
+  // if(fV1720Ch1)
+  // {
+  //   TV1720RawData *v1720 = dataContainer.GetEventData<TV1720RawData>("DG01");
+  //   if (v1720 && !v1720->IsZLECompressed())
+  //   {
+  //     TV1720RawChannel channelData = v1720->GetChannelData(0);
+  //     int numsamples = channelData.GetNSamples();
+  //     // if(numsamples<= 0) continue;
+  //         int max_val= -1;
+  //         int max_time= -1;
+  //         for (int j = 0; j < numsamples; j++)
+  //         {
+  //           int adc;
+  //           adc = channelData.GetADCSample(j);
+  //           if(adc>max_val)
+  //           {
+  //             max_val=adc;
+  //             max_time = j * 4;
+  //           }
+  //         }
 
-      fV1720Ch1->Fill(max_val);
-    }
-  }
+  //     fV1720Ch1->Fill(max_val);
+  //   }
+  // }
 
 
-  if(fV1720Ch2)
-  {
-    TV1720RawData *v1720 = dataContainer.GetEventData<TV1720RawData>("DG01");
-    if (v1720 && !v1720->IsZLECompressed())
-    {
-      TV1720RawChannel channelData = v1720->GetChannelData(2);
-      int numsamples = channelData.GetNSamples();
-      // if(numsamples<= 0) continue;
-          int max_val= -1;
-          int max_time= -1;
-          for (int j = 0; j < numsamples; j++)
-          {
-            int adc;
-            adc = channelData.GetADCSample(j);
-            if(adc>max_val)
-            {
-              max_val=adc;
-              max_time = j * 4;
-            }
-          }
+  // if(fV1720Ch2)
+  // {
+  //   TV1720RawData *v1720 = dataContainer.GetEventData<TV1720RawData>("DG01");
+  //   if (v1720 && !v1720->IsZLECompressed())
+  //   {
+  //     TV1720RawChannel channelData = v1720->GetChannelData(2);
+  //     int numsamples = channelData.GetNSamples();
+  //     // if(numsamples<= 0) continue;
+  //         int max_val= -1;
+  //         int max_time= -1;
+  //         for (int j = 0; j < numsamples; j++)
+  //         {
+  //           int adc;
+  //           adc = channelData.GetADCSample(j);
+  //           if(adc>max_val)
+  //           {
+  //             max_val=adc;
+  //             max_time = j * 4;
+  //           }
+  //         }
 
-      fV1720Ch2->Fill(max_val);
-    }
-  }
+  //     fV1720Ch2->Fill(max_val);
+  //   }
+  // }
 
-  if(fV1720Ch3)
-  {
-    TV1720RawData *v1720 = dataContainer.GetEventData<TV1720RawData>("DG01");
-    if (v1720 && !v1720->IsZLECompressed())
-    {
-      TV1720RawChannel channelData = v1720->GetChannelData(2);
-      int numsamples = channelData.GetNSamples();
-      // if(numsamples<= 0) continue;
-          int max_val= -1;
-          int max_time= -1;
-          for (int j = 0; j < numsamples; j++)
-          {
-            int adc;
-            adc = channelData.GetADCSample(j);
-            if(adc>max_val)
-            {
-              max_val=adc;
-              max_time = j * 4;
-            }
-          }
+  // if(fV1720Ch3)
+  // {
+  //   TV1720RawData *v1720 = dataContainer.GetEventData<TV1720RawData>("DG01");
+  //   if (v1720 && !v1720->IsZLECompressed())
+  //   {
+  //     TV1720RawChannel channelData = v1720->GetChannelData(2);
+  //     int numsamples = channelData.GetNSamples();
+  //     // if(numsamples<= 0) continue;
+  //         int max_val= -1;
+  //         int max_time= -1;
+  //         for (int j = 0; j < numsamples; j++)
+  //         {
+  //           int adc;
+  //           adc = channelData.GetADCSample(j);
+  //           if(adc>max_val)
+  //           {
+  //             max_val=adc;
+  //             max_time = j * 4;
+  //           }
+  //         }
 
-      fV1720Ch3->Fill(max_val);
-    }
-  }
+  //     fV1720Ch3->Fill(max_val);
+  //   }
+  // }
 
-  if(fV1720Ch4)
-  {
-    TV1720RawData *v1720 = dataContainer.GetEventData<TV1720RawData>("DG01");
-    if (v1720 && !v1720->IsZLECompressed())
-    {
-      TV1720RawChannel channelData = v1720->GetChannelData(2);
-      int numsamples = channelData.GetNSamples();
-      // if(numsamples<= 0) continue;
-          int max_val= -1;
-          int max_time= -1;
-          for (int j = 0; j < numsamples; j++)
-          {
-            int adc;
-            adc = channelData.GetADCSample(j);
-            if(adc>max_val)
-            {
-              max_val=adc;
-              max_time = j * 4;
-            }
-          }
+  // if(fV1720Ch4)
+  // {
+  //   TV1720RawData *v1720 = dataContainer.GetEventData<TV1720RawData>("DG01");
+  //   if (v1720 && !v1720->IsZLECompressed())
+  //   {
+  //     TV1720RawChannel channelData = v1720->GetChannelData(2);
+  //     int numsamples = channelData.GetNSamples();
+  //     // if(numsamples<= 0) continue;
+  //         int max_val= -1;
+  //         int max_time= -1;
+  //         for (int j = 0; j < numsamples; j++)
+  //         {
+  //           int adc;
+  //           adc = channelData.GetADCSample(j);
+  //           if(adc>max_val)
+  //           {
+  //             max_val=adc;
+  //             max_time = j * 4;
+  //           }
+  //         }
 
-      fV1720Ch4->Fill(max_val);
-    }
-  }
+  //     fV1720Ch4->Fill(max_val);
+  //   }
+  // }
 
 
 
@@ -251,7 +252,7 @@ int TAnaManager::ProcessMidasEvent(TDataContainer& dataContainer){
 // 	if(fAgilentHistogram) return true; 
 // 	return false;
 // };
-bool TAnaManager::HaveV1720Histograms(){
+/*bool TAnaManager::HaveV1720Histograms(){
 	if(fV1720Waveform) return true; 
 	return false;
 };
@@ -262,7 +263,7 @@ bool TAnaManager::HaveV1720Correlations(){
 bool TAnaManager::HaveV1720Ch1(){
   if(fV1720Ch1) return true; 
   return false;
-};
+};*/
 
 // bool TAnaManager::HaveV1730DPPistograms(){
 // 	if(fV1730DppWaveform) return true; 
@@ -281,8 +282,8 @@ bool TAnaManager::HaveV1720Ch1(){
 // TV1190Histograms* TAnaManager::GetV1190Histograms(){return fV1190Histogram;}
 // TL2249Histograms* TAnaManager::GetL2249Histograms(){return fL2249Histogram;}
 // TAgilentHistograms* TAnaManager::GetAgilentistograms(){return fAgilentHistogram;}
-TV1720Waveform* TAnaManager::GetV1720Histograms(){return fV1720Waveform;}
-TV1720Correlations* TAnaManager::GetV1720Correlations(){return fV1720Correlations;}
+// TV1720Waveform* TAnaManager::GetV1720Histograms(){return fV1720Waveform;}
+// TV1720Correlations* TAnaManager::GetV1720Correlations(){return fV1720Correlations;}
 // TV1720Waveform1* TAnaManager::GetV1720Histograms(){return fV1720Ch1;}
 // TV1720Ch1* TAnaManager::GetV1720Ch1(){return fV1720Ch1;}
 // TV1730DppWaveform* TAnaManager::GetV1730DPPistograms(){return fV1730DppWaveform;}

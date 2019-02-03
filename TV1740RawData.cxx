@@ -57,8 +57,8 @@ void TV1740RawData::HandlUncompressedData(){
         channel.AddADCSample(samp8);      
         iPtr = iPtr+3;
         }
+        fMeasurements.push_back(channel);
       }
-      fMeasurements.push_back(channel);
     }  
 }
 

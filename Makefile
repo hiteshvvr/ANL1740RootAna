@@ -70,7 +70,7 @@ OBJS += TAnaManager.o
 
 #all: $(OBJS) ana.exe anaDisplay.exe midas2root.exe
 # all: $(OBJS) anaDisplay.exe midas2root.exe
- all: $(OBJS) midas2root.exe
+all: $(OBJS) midas2root.exe
 
 # ana.exe: ana.cxx $(OBJS) 
 # 	$(CXX) -o $@ $(CXXFLAGS) $^ $(LIBS) $(ROOTGLIBS) -lm -lz -lpthread -lssl -lutil
