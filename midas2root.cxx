@@ -20,6 +20,9 @@
 // using namespace std;
 
 #include "TAnaManager.hxx"
+#include "TH2D.h"
+#include "TH1D.h"
+#include "THistogramArrayBase.h"
 
 #ifdef USE_V1740
 #include "TV1740RawData.h"
@@ -50,6 +53,7 @@ public:
     int v1740ch0data[4096];
 #endif
 
+    TH1D *a =  new TH1D("QuadA", "QuadA", 1000, 00, 5000);
     Analyzer() {};
 
     virtual ~Analyzer() {};
@@ -67,6 +71,13 @@ public:
     }
 
     void EndRun(int transition, int run, int time) {
+
+    a->SetXTitle("sample");
+    a->SetYTitle("Value");
+    a->Write("Pulse");
+
+
+
         if (getrawdata == 1)
             outfile.close();
         printf("\n");
@@ -91,6 +102,8 @@ public:
             numsamples = channelData.GetNSamples();
             for (j = 0; j < numsamples; j++)
                 outfile << timetag + j*16 << "  " << channelData.GetADCSample(j) << "\n";
+
+            a->SetBinContent (j, channelData.GetADCSample(j));
         }
 
         else 
