@@ -62,21 +62,16 @@ endif # MIDASSYS
 # OBJS += TV1720Waveform.o TDT724Waveform.o
 # OBJS += TV1730DppWaveform.o TV1730RawWaveform.o
 
-OBJS:= 
-OBJS += TV1720Waveform.o
-OBJS += TV1720Correlations.o
+OBJS:=
 OBJS += TV1740RawData.o
 OBJS += TAnaManager.o
 
-#all: $(OBJS) ana.exe anaDisplay.exe midas2root.exe
-# all: $(OBJS) anaDisplay.exe midas2root.exe
+#all: $(OBJS) anaDisplay.exe midas2root.exe
+#all: $(OBJS) anaDisplay.exe midas2root.exe
 all: $(OBJS) midas2root.exe
 
-# ana.exe: ana.cxx $(OBJS) 
-# 	$(CXX) -o $@ $(CXXFLAGS) $^ $(LIBS) $(ROOTGLIBS) -lm -lz -lpthread -lssl -lutil
-
-# anaDisplay.exe: anaDisplay.cxx $(OBJS) 
-# 	$(CXX) -o $@ $(CXXFLAGS) $^ $(LIBS) $(ROOTGLIBS) -lm -lz -lpthread -lssl -lutil
+anaDisplay.exe: anaDisplay.cxx $(OBJS) 
+	$(CXX) -o $@ $(CXXFLAGS) $^ $(LIBS) $(ROOTGLIBS) -lm -lz -lpthread -lssl -lutil
 
 midas2root.exe: midas2root.cxx $(OBJS) 
 	$(CXX) -o $@ $(CXXFLAGS) $^ $(LIBS) $(ROOTGLIBS) -lm -lz -lpthread -lssl -lutil

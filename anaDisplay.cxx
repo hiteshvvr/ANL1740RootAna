@@ -49,11 +49,14 @@ public:
     // if(anaManager->HaveAgilentistograms()) 
     //   AddSingleCanvas(new TFancyHistogramCanvas(anaManager->GetAgilentistograms(),"AGILENT"));
     
-    if(anaManager->HaveV1720Histograms()) 
-      AddSingleCanvas(new TFancyHistogramCanvas(anaManager->GetV1720Histograms(),"V1720 Waveforms"));
+    // if(anaManager->HaveV1720Histograms()) 
+    //   AddSingleCanvas(new TFancyHistogramCanvas(anaManager->GetV1720Histograms(),"V1720 Waveforms"));
+    
+    if(anaManager->HaveV1740Histograms()) 
+      AddSingleCanvas(new TFancyHistogramCanvas(anaManager->GetV1740Histograms(),"V1740 Waveforms"));
 
-    if(anaManager->HaveV1720Correlations()) 
-      AddSingleCanvas(new TFancyHistogramCanvas(anaManager->GetV1720Correlations(),"V1720 Correlations"));
+    // if(anaManager->HaveV1720Correlations()) 
+      // AddSingleCanvas(new TFancyHistogramCanvas(anaManager->GetV1720Correlations(),"V1720 Correlations"));
 
     // if(anaManager->HaveV1720Ch1()) 
     //   AddSingleCanvas(new TFancyHistogramCanvas(anaManager->GetV1720Ch1(),"V1720 Ch1Data"));
@@ -67,7 +70,7 @@ public:
     // if(anaManager->HaveDT724Histograms()) 
     //   AddSingleCanvas(new TFancyHistogramCanvas(anaManager->GetDT724Histograms(),"DT724 Waveforms"));
     
-    SetDisplayName("Example Display");
+    SetDisplayName("V1740 Data");
   };
 
   virtual ~MyTestLoop() {};
