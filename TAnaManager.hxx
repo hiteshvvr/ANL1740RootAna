@@ -14,12 +14,13 @@
 // #define USE_V1730RAW
 // #define USE_DT724
 
-#include "TRootanaEventLoop.hxx"
+// #include "TRootanaEventLoop.hxx"
 // #include "TV792Histogram.h"
 // #include "TV1190Histogram.h"
 // #include "TL2249Histogram.h"
 // #include "TAgilentHistogram.h"
 // #include "TV1720Waveform.h"
+#include "TV1740Waveform.h"
 // #include "TV1720Correlations.h"
 // #include "TV1730DppWaveform.h"
 // #include "TV1730RawWaveform.h"
@@ -43,6 +44,7 @@ public:
 	// bool HaveL2249Histograms();
 	// bool HaveAgilentistograms();
 	// bool HaveV1720Histograms();
+        bool HaveV1740Histograms();
   	// bool HaveV1720Correlations();
     // bool HaveV1720Ch1();
 	// bool HaveV1730DPPistograms();
@@ -55,6 +57,7 @@ public:
 	// TL2249Histograms* GetL2249Histograms();
 	// TAgilentHistograms* GetAgilentistograms();
 	// TV1720Waveform* GetV1720Histograms();
+        TV1740Waveform* GetV1740Histograms();
   	// TV1720Correlations* GetV1720Correlations();
     // TV1720Ch1* GetV1720Ch1();
 	// TV1730DppWaveform* GetV1730DPPistograms();
@@ -69,6 +72,7 @@ private:
 	// TL2249Histograms *fL2249Histogram;
 	// TAgilentHistograms *fAgilentHistogram;
 	// TV1720Waveform *fV1720Waveform;
+         TV1740Waveform *fV1740Waveform;
   	// TV1720Correlations *fV1720Correlations;
     // TV1720Ch1 *fV1720Ch1;
 
@@ -80,11 +84,6 @@ private:
   // TH2F *fV1720PHCompare;
   // TH2F *fV1720TimeCompare;
 
-  // Make some normal channel histograms
-  // TH1D  *fV1720Ch1;
-  // TH1D  *fV1720Ch2;
-  // TH1D  *fV1720Ch3;
-  // TH1D  *fV1720Ch4;
 };
 
 

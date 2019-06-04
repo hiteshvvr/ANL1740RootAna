@@ -64,11 +64,12 @@ endif # MIDASSYS
 
 OBJS:=
 OBJS += TV1740RawData.o
+OBJS += TV1740Waveform.o
 OBJS += TAnaManager.o
 
 #all: $(OBJS) anaDisplay.exe midas2root.exe
-#all: $(OBJS) anaDisplay.exe midas2root.exe
-all: $(OBJS) midas2root.exe
+all: $(OBJS) anaDisplay.exe midas2root.exe
+#all: $(OBJS) midas2root.exe
 
 anaDisplay.exe: anaDisplay.cxx $(OBJS) 
 	$(CXX) -o $@ $(CXXFLAGS) $^ $(LIBS) $(ROOTGLIBS) -lm -lz -lpthread -lssl -lutil

@@ -98,12 +98,15 @@ public:
 
             timetag = v1740->GetTriggerTag();
             int channelmask = v1740->GetChannelMask();
-            TV1740RawChannel channelData = v1740->GetChannelData(i);
+            TV1740RawChannel channelData = v1740->GetChannelData(0);
             numsamples = channelData.GetNSamples();
+            printf("Valueofnumsam::: %d\n",numsamples);
+            outfile << midasid << "------" << "\n";
             for (j = 0; j < numsamples; j++)
+            {
                 outfile << timetag + j*16 << "  " << channelData.GetADCSample(j) << "\n";
-
-            a->SetBinContent (j, channelData.GetADCSample(j));
+                a->SetBinContent (j, channelData.GetADCSample(j));
+            }
         }
 
         else 
